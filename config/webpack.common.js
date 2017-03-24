@@ -1,5 +1,5 @@
 const helpers = require('./helpers');
-const env = require('./environment');
+const env = require('../environment');
 
 
 const config = {};
@@ -18,6 +18,7 @@ else {
 
 config.resolve = {
 	extensions: ['.js', '.ts'],
+	mainFields: ['module', 'browser', 'main'],
 	modules: [
 		helpers.root('src'),
 		helpers.root('node_modules')

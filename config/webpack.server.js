@@ -2,7 +2,8 @@ const mergeWebpack = require('webpack-merge');
 const nodeExternals = require('webpack-node-externals');
 const commonConfig = require('./webpack.common');
 const webpack = require('webpack');
-const env = require('./environment');
+const helpers = require('./helpers');
+const env = require('../environment');
 
 
 const config = {};
@@ -15,12 +16,12 @@ config.externals = [nodeExternals()];
 
 
 if (!env.isTest) {
-	config.entry = helpers.root('src/backend/server.ts');
+	config.entry = helpers.root('src', 'backend', 'bootstrap.ts');
 }
 
 
 config.output = env.isTest ? {} : {
-	filname: 'server.js',
+	filename: 'server.js',
 	path: helpers.root('dist')
 }
 
