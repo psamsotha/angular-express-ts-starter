@@ -17,8 +17,7 @@ else {
 
 
 config.resolve = {
-	extensions: ['.js', '.ts'],
-	mainFields: ['module', 'browser', 'main'],
+	extensions: ['.ts', '.js', '.json', '.css', '.scss', '.html'],
 	modules: [
 		helpers.root('src'),
 		helpers.root('node_modules')

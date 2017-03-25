@@ -26,6 +26,7 @@ export class Server {
 	}
 
 	private configureProperties(): void {
+		this.app.disable('x-powered-by');
 		this.app.set('json spaces', 2);
 		this.app.set('etag', 'strong');
 		this.app.set('port', port);
@@ -37,6 +38,7 @@ export class Server {
 		}
 		
 		this.app.use(bodyParser.json());
+		this.app.use(express.static('./', {index: false}));
 	}
 
 	private configureRoutes(): void {

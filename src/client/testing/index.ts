@@ -1,0 +1,2 @@
+
+export { HttpTestingModule } from './http';

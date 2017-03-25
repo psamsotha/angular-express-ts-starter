@@ -16,7 +16,7 @@ describe('routes:integration', () => {
 		}
 
 		describe('GET /hello', () => {
-			it('should return hello json', (done) => {
+			it('should return hello json', (done: Function) => {
 				request(app())
 					.get('/api/hello')
 					.expect(200)
@@ -26,7 +26,7 @@ describe('routes:integration', () => {
 						expect(body).to.eql({message: 'Hello World'});
 					})
 					.end((error: any, res: Response) => {
-						if (error) return done(error)
+						if (error) return done(error);
 						return done();
 					});
 			});
