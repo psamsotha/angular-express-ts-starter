@@ -10,13 +10,15 @@ const config = {};
 
 
 config.target = 'node';
-
-
 config.externals = [nodeExternals()];
+config.node = {
+	__dirname: false,
+	__filename: false
+};
 
 
 if (!env.isTest) {
-	config.entry = helpers.root('src', 'backend', 'bootstrap.ts');
+	config.entry = helpers.root('src', 'backend', 'server.ts');
 }
 
 

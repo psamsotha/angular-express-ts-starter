@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const helpers = require('./helpers');
 const env = require('../environment');
 
@@ -36,7 +37,13 @@ config.module = {
 };
 
 
-config.plugins = [];
+config.plugins = [
+	new webpack.DefinePlugin({
+		'process.env': {
+			ENV: JSON.stringify(env.ENV)
+		}
+	})
+];
 
 
 module.exports = config;

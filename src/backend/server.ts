@@ -1,56 +1,17 @@
-
-import * as express from 'express';
-import * as logger from 'morgan';
-import * as bodyParser from 'body-parser';
-
-import { Express } from 'express';
-import { Routes } from './routes';
+import * as logger from 'winston';
+import { server } from './config/app';
 
 
-const port = process.env.PORT || 3000;
+const PORT = server.get('port');
+const HOST = server.get('host');
 
 
-export class Server {
-	private _loggingDisabled = false;
-
-	constructor(private app: Express) { }
-
-
-	configure(): Express {
-		this.configureProperties();
-		this.configureMiddleware();
-		this.configureRoutes();
-		this.configureErrorHandling();
-
-		return this.app;
+server
+.listen(PORT, HOST, (error: Error) => {
+	if (error) {
+		logger.error(error.message);
+		throw error;
 	}
+  logger.info(`Server running @ ${HOST}:${PORT}`);
+});
 
-	private configureProperties(): void {
-		this.app.disable('x-powered-by');
-		this.app.set('json spaces', 2);
-		this.app.set('etag', 'strong');
-		this.app.set('port', port);
-	}
-
-	private configureMiddleware(): void {
-		if (!this._loggingDisabled) {
-			this.app.use(logger('common'));
-		}
-		
-		this.app.use(bodyParser.json());
-		this.app.use(express.static('./', {index: false}));
-	}
-
-	private configureRoutes(): void {
-		Routes.configure(this.app);
-	}
-
-	private configureErrorHandling(): void {
-
-	}
-
-	disableLogging(): Server {
-		this._loggingDisabled = true;
-		return this;
-	}
-}

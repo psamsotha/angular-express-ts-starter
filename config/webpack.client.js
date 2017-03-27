@@ -64,12 +64,6 @@ config.module = {
 
 
 config.plugins = [
-	new webpack.DefinePlugin({
-		'process.env': {
-			ENV: JSON.stringify(env.ENV)
-		}
-	}),
-
   /*
 	new webpack.ContextReplacementPlugin(
 		/angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
