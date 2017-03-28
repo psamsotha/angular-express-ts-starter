@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HelloService, Hello } from 'client/hello';
 
 
 @Component({
@@ -7,17 +6,6 @@ import { HelloService, Hello } from 'client/hello';
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
 
-	message = 'Loading message...';
-
-
-	constructor(private service: HelloService) {}
-
-
-	ngOnInit() {
-		this.service.getHelloMessage().subscribe((hello: Hello) => {
-			this.message = hello.message;
-		});
-	}
 }

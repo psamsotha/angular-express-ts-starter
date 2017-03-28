@@ -1,9 +1,17 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
+import { StoreModule } from '@ngrx/store';
 
 import { AppComponent } from './app.component';
-import { HelloModule } from 'client/hello';
+import { SharedModule } from 'client/shared';
+import { PetsModule } from 'client/pets';
+
+import { petsReducer } from 'client/pets';
+
+
+export { AppState } from './app.state';
+
 
 
 @NgModule({
@@ -11,7 +19,11 @@ import { HelloModule } from 'client/hello';
 		HttpModule,
 		BrowserModule,
 
-		HelloModule.forRoot()
+    SharedModule,
+		PetsModule.forRoot(),
+		StoreModule.provideStore({
+			pets: petsReducer
+		})
 	],
 	declarations: [
 		AppComponent

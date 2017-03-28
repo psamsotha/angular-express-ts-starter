@@ -1,5 +1,6 @@
 import 'reflect-metadata';
 import * as path from 'path';
+import * as cors from 'cors';
 import * as helmet from 'helmet';
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
@@ -40,6 +41,8 @@ const server = bootstrapServer(MODULES, '/api')
 
 	if (DEVELOPMENT) {
 		app.set('json spaces', 2);
+
+		app.use(cors());
 		app.use(require('morgan')('dev'));
 	}
 

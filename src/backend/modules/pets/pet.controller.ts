@@ -17,4 +17,12 @@ export class PetController {
 			res.json(pet);
 		});
 	}
+
+	@Get('/')
+	getApp(req: Request, res: Response, next: NextFunction) {
+		return this.repo.findAll().then(pets => {
+			res.json(pets);
+		})
+	}
 }
+

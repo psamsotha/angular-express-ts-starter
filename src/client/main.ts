@@ -1,4 +1,4 @@
-import './assets/styles.scss';
+import './shared/assets/styles.scss';
 
 import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
@@ -6,7 +6,7 @@ import { AppModule } from './app';
 
 
 
-if (process.env.ENV === 'build') {
+if (process.env.ENV.indexOf('build') !== -1) {
   enableProdMode();
 }
 

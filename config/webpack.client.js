@@ -32,12 +32,12 @@ config.output = env.isTest ? {} : {
 const rules = {
 	componentStyles: {
 		test: /\.scss$/,
-		exclude: helpers.root('src', 'client', 'assets'),
+		exclude: helpers.root('src', 'client', 'shared', 'assets'),
 		loader: 'raw-loader!postcss-loader!sass-loader'
 	},
 	sharedStyles: {
 		test: /\.scss$/,
-		include: helpers.root('src', 'client', 'assets'),
+		include: helpers.root('src', 'client', 'shared', 'assets'),
 		loader: env.isTest ? 'null-loader' : ExtractTextPlugin.extract({
 			fallback: 'style-loader', use: ['css-loader', 'postcss-loader', 'sass-loader']
 		})
@@ -87,14 +87,6 @@ config.plugins = [
 ];
 
 
-/*
-if (env.isDev) {
-	new HtmlWebpackPlugin({
-		template: './src/client/index.html',
-		chunksSortMode: 'dependency'
-	})
-}*/
-
 if (!env.isTest && !env.isTestWatch) {
 	config.plugins.push(
 
@@ -107,12 +99,6 @@ if (!env.isTest && !env.isTestWatch) {
 		  chunksSortMode: 'dependency'
 	  }),
 
-		// wait till we configure the server views
-		// new HtmlWebpackPlugin({
-		//	template: './src/public/index.html',
-		//	chunksSortMode: 'dependency'
-		//})
-
 		new ExtractTextPlugin({ filename: 'css/[name].[hash].css', disable: !env.isProd })
 	);
 }
@@ -122,7 +108,10 @@ config.devServer = {
 	contentBase: './src/client',
 	historyApiFallback: true,
 	quiet: false,
-	stats: 'minimal'
+	stats: 'minimal',
+	headers: {
+		"Access-Control-Allow-Origin": "*"
+	}
 }
 
 module.exports = mergeWebpack(commonConfig, config);
